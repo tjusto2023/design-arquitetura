@@ -507,3 +507,544 @@ $mediaTypes: (
 ```
 
 Agora, os nomes dos tipos de media estão mais alinhados com os dispositivos que representam, tornando o código mais semântico e fácil de entender. Essa é uma boa prática para manter a clareza e a consistência no seu código Sass.
+
+### Referências adicionais
+
+[How to Write Media Queries with SASS Mixins](https://dev.to/rembertdesigns/how-to-write-media-queries-with-sass-mixins-32e)\
+[A Complete Guide to CSS Media Queries
+](https://css-tricks.com/a-complete-guide-to-css-media-queries/)
+
+## Style Guide
+
+Configurar um guia de estilo (style guide) usando Sass envolve definir diretrizes para a tipografia, paleta de cores e outros estilos visuais que serão consistentemente aplicados em um projeto. Vou fornecer um exemplo básico para começar. Certifique-se de ajustar conforme as necessidades específicas do seu projeto.
+
+1. **Estrutura de Pastas:**
+   - Comece organizando seu projeto. Aqui está uma estrutura simples:
+     ```
+     styles/
+     ├── base/
+     │   ├── _typography.scss
+     │   ├── _colors.scss
+     ├── components/
+     │   ├── _buttons.scss
+     │   ├── _forms.scss
+     ├── main.scss
+     ```
+
+2. **Definindo Tipografia (_typography.scss):**
+   ```scss
+   // _typography.scss
+   $base-font-size: 16px;
+
+   body {
+     font-family: 'Arial', sans-serif;
+     font-size: $base-font-size;
+     line-height: 1.5;
+   }
+
+   h1, h2, h3, h4, h5, h6 {
+     font-family: 'Helvetica', sans-serif;
+     // Defina outros estilos de cabeçalho conforme necessário
+   }
+   ```
+
+3. **Definindo Paleta de Cores (_colors.scss):**
+   ```scss
+   // _colors.scss
+   $primary-color: #3498db;
+   $secondary-color: #2ecc71;
+   $accent-color: #e74c3c;
+
+   // Pode incluir mais cores conforme necessário
+   ```
+
+4. **Componentes (buttons, forms, etc.):**
+   ```scss
+   // _buttons.scss
+   .button {
+     padding: 10px 20px;
+     font-size: $base-font-size;
+     background-color: $primary-color;
+     color: #fff;
+     border: none;
+     cursor: pointer;
+
+     &:hover {
+       background-color: darken($primary-color, 10%);
+     }
+   }
+   ```
+
+   ```scss
+   // _forms.scss
+   input, textarea {
+     padding: 10px;
+     margin: 5px 0;
+     border: 1px solid $primary-color;
+   }
+   ```
+
+5. **Main Stylesheet (main.scss):**
+   ```scss
+   // main.scss
+   @import 'base/typography';
+   @import 'base/colors';
+   @import 'components/buttons';
+   @import 'components/forms';
+   ```
+
+6. **Compilando com Sass:**
+   Certifique-se de compilar seu arquivo Sass em um arquivo CSS usando um compilador Sass. Você pode usar ferramentas como `node-sass`, `sass`, ou integrar com frameworks como Angular ou React que incluem suporte ao Sass.
+
+   Exemplo com `node-sass`:
+   ```bash
+   node-sass styles/main.scss -o dist/css
+   ```
+
+7. **Integrando no HTML:**
+   Inclua o arquivo CSS gerado no HTML:
+   ```html
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="dist/css/main.css">
+     <title>Seu Projeto</title>
+   </head>
+   <body>
+     <!-- Seu conteúdo HTML aqui -->
+   </body>
+   </html>
+   ```
+
+Este é um exemplo básico para começar. Você pode expandir e personalizar de acordo com as necessidades específicas do seu projeto. Certifique-se de ajustar as variáveis, estilos e estrutura conforme necessário.
+
+### Usando mixins
+
+Vamos refatorar o exemplo anterior para incluir mixins no lugar das variáveis para a tipografia e paleta de cores. Os mixins oferecem mais flexibilidade ao aplicar estilos reutilizáveis em diferentes contextos.
+
+1. **Estrutura de Pastas:**
+   ```
+   styles/
+   ├── mixins/
+   │   ├── _typography.scss
+   │   ├── _colors.scss
+   ├── components/
+   │   ├── _buttons.scss
+   │   ├── _forms.scss
+   ├── main.scss
+   ```
+
+2. **Definindo Mixins para Tipografia e Cores:**
+
+   ```scss
+   // _typography.scss
+   @mixin typography {
+     $base-font-size: 16px;
+
+     body {
+       font-family: 'Arial', sans-serif;
+       font-size: $base-font-size;
+       line-height: 1.5;
+     }
+
+     h1, h2, h3, h4, h5, h6 {
+       font-family: 'Helvetica', sans-serif;
+       // Defina outros estilos de cabeçalho conforme necessário
+     }
+   }
+   ```
+
+   ```scss
+   // _colors.scss
+   @mixin colors {
+     $primary-color: #3498db;
+     $secondary-color: #2ecc71;
+     $accent-color: #e74c3c;
+
+     // Pode incluir mais cores conforme necessário
+   }
+   ```
+
+3. **Componentes (buttons, forms, etc.):**
+   
+   ```scss
+   // _buttons.scss
+   @import '../mixins/colors';
+
+   @mixin button-styles {
+     padding: 10px 20px;
+     font-size: $base-font-size;
+     background-color: $primary-color;
+     color: #fff;
+     border: none;
+     cursor: pointer;
+
+     &:hover {
+       background-color: darken($primary-color, 10%);
+     }
+   }
+
+   .button {
+     @include button-styles;
+   }
+   ```
+
+   ```scss
+   // _forms.scss
+   @mixin form-styles {
+     input, textarea {
+       padding: 10px;
+       margin: 5px 0;
+       border: 1px solid $primary-color;
+     }
+   }
+
+   @include form-styles;
+   ```
+
+4. **Main Stylesheet (main.scss):**
+
+   ```scss
+   // main.scss
+   @import 'mixins/typography';
+   @import 'mixins/colors';
+   @import 'components/buttons';
+   @import 'components/forms';
+   ```
+
+5. **Compilando com Sass:**
+
+   Compile seu arquivo Sass em um arquivo CSS como anteriormente.
+
+6. **Integrando no HTML:**
+
+   Inclua o arquivo CSS gerado no HTML.
+
+Este exemplo usa mixins para tornar os estilos mais modulares e reutilizáveis. Você pode criar mixins adicionais conforme necessário e aplicá-los nos componentes desejados. Ajuste conforme as necessidades específicas do seu projeto.
+
+## Paleta de cores
+
+Usar `sass:map` para criar uma paleta de cores em Sass pode tornar o código mais organizado e fácil de gerenciar. Aqui está um exemplo básico:
+
+1. **Definindo a Paleta de Cores:**
+
+   ```scss
+   // _colors.scss
+   $color-palette: (
+     primary: #3498db,
+     secondary: #2ecc71,
+     accent: #e74c3c,
+     // Adicione mais cores conforme necessário
+   );
+   ```
+
+2. **Criando uma Função para Obter Cores:**
+
+   ```scss
+   // _colors.scss
+   @function get-color($color) {
+     @return map-get($color-palette, $color);
+   }
+   ```
+
+3. **Usando a Paleta de Cores em Componentes:**
+
+   ```scss
+   // _buttons.scss
+   @import 'colors';
+
+   .button {
+     background-color: get-color(primary);
+     // Outros estilos de botão
+   }
+   ```
+
+   ```scss
+   // _forms.scss
+   @import 'colors';
+
+   input {
+     border: 1px solid get-color(primary);
+     // Outros estilos de formulário
+   }
+   ```
+
+4. **Compilando com Sass:**
+
+   Certifique-se de compilar todos os arquivos Sass em um único arquivo CSS.
+
+Dessa forma, você tem uma paleta de cores centralizada que pode ser facilmente ajustada ou expandida. A função `get-color` ajuda a obter uma cor específica da paleta em diferentes partes do seu código. Isso facilita a manutenção e a consistência nas escolhas de cores em todo o projeto.
+
+
+### Usando function get-color
+
+Você pode adaptar a função `get-color` para retornar um objeto de cores se você precisar de mais informações além da cor principal. Aqui está um exemplo de como você poderia fazer isso:
+
+1. **Modificando a Função `get-color`:**
+
+   ```scss
+   // _colors.scss
+   $color-palette: (
+     primary: #3498db,
+     secondary: #2ecc71,
+     accent: #e74c3c,
+     // Adicione mais cores conforme necessário
+   );
+
+   @function get-color($color) {
+     $color-value: map-get($color-palette, $color);
+
+     @return (
+       name: $color,
+       value: $color-value
+     );
+   }
+   ```
+
+2. **Usando a Função com Objetos de Cores:**
+
+   ```scss
+   // _buttons.scss
+   @import 'colors';
+
+   .button {
+     $primary-color: get-color(primary);
+
+     background-color: $primary-color;
+     border: 2px solid $primary-color;
+     // Outros estilos de botão
+   }
+   ```
+
+Agora, quando você usa `get-color(primary)`, ele retorna um objeto com a propriedade `value` contendo o valor da cor principal e a propriedade `name` contendo o nome da cor. Você pode ajustar essa estrutura conforme necessário para atender aos requisitos específicos do seu projeto.
+
+### Usando de forma global a função get-color
+
+Se você deseja tornar a função `get-color` global sem importar manualmente em cada arquivo SCSS, você pode considerar o uso de variáveis globais do Sass e o webpack para configurar o carregamento dessas variáveis globais.
+
+Aqui está um exemplo de como você pode fazer isso:
+
+1. **Criar um arquivo `_colors.scss`:**
+
+   ```scss
+   // _colors.scss
+   $color-palette: (
+     primary: #3498db,
+     secondary: #2ecc71,
+     accent: #e74c3c,
+     // Adicione mais cores conforme necessário
+   );
+
+   @function get-color($color) {
+     $color-value: map-get($color-palette, $color);
+
+     @return (
+       name: $color,
+       value: $color-value
+     );
+   }
+
+   // Exportando variáveis globais
+   :export {
+     get-color: get-color;
+   }
+   ```
+
+2. **Configurar o Webpack para carregar variáveis globais:**
+
+   Adicione a seguinte configuração ao seu arquivo `webpack.config.js` para carregar as variáveis globais no início de seus estilos:
+
+   ```javascript
+   // webpack.config.js
+   const path = require('path');
+
+   module.exports = {
+     // ... outras configurações
+
+     module: {
+       rules: [
+         {
+           test: /\.scss$/,
+           use: [
+             'style-loader',
+             'css-loader',
+             'sass-loader',
+             {
+               loader: 'sass-resources-loader',
+               options: {
+                 resources: [
+                   path.resolve(__dirname, 'caminho/para/_colors.scss'),
+                   // Adicione outros caminhos conforme necessário
+                 ],
+               },
+             },
+           ],
+         },
+       ],
+     },
+   };
+   ```
+
+   Certifique-se de ajustar o caminho para `_colors.scss` conforme necessário.
+
+Dessa forma, você terá a função `get-color` disponível globalmente em todos os seus estilos sem precisar importá-la manualmente em cada arquivo SCSS.
+
+## Grids
+
+Dê preferencia ao uso de grid para o layout geral da página e flexbox para componentes internos.
+
+### Abordagem Híbrida:
+
+Propõe uma estratégia de combinar as vantagens do grid e do flexbox em um projeto.
+Sugere usar grid para o layout geral da página, definindo a estrutura de linhas e colunas.
+Recomenda utilizar flexbox para posicionar e organizar os componentes internos dentro dessas áreas do grid.
+
+### Grid para o Layout Principal:
+
+Enfatiza o uso de grid para criar um layout principal, dividindo a página em seções e áreas.
+Destaca a capacidade do grid de lidar com layouts bidimensionais de forma eficiente.
+flexbox para Componentes Internos:
+
+Sugere que flexbox seja aplicado aos componentes internos dentro das áreas do grid.
+Aponta para a flexibilidade do flexbox em organizar elementos em uma única dimensão, como linhas ou colunas.
+
+### Vantagens de grid:
+
+Aborda as vantagens do grid na criação de layouts complexos e alinhamento bidimensional.
+Destaca a capacidade de criar estruturas de layout de forma mais rápida e eficiente.
+Vantagens de flexbox:
+
+Salienta que flexbox é especialmente eficaz para organizar itens em uma direção, sendo ideal para componentes internos.
+Exemplos Práticos:
+
+Oferece exemplos práticos de como implementar essa abordagem híbrida em projetos reais.
+Demonstração de código e explicações sobre como usar grid e flexbox em conjunto.
+Conclusão:
+
+Conclui destacando que a escolha entre grid e flexbox pode depender das necessidades específicas de cada parte do layout.
+
+A abordagem proposta no artigo visa aproveitar o melhor de ambos os mundos, utilizando as características específicas de grid e flexbox para diferentes partes do projeto. Isso permite uma maior flexibilidade e eficiência no desenvolvimento de layouts complexos.
+
+O uso de `display: grid` e `display: flex` em vez de bibliotecas prontas de grids e colunas oferece algumas vantagens, embora a escolha dependa dos requisitos específicos do projeto. Aqui estão algumas vantagens:
+
+### Vantagens de `display: grid`:
+
+1. **Flexibilidade na Estruturação:**
+   - Permite criar layouts complexos e personalizados.
+   - Facilita a criação de layouts bidimensionais com linhas e colunas.
+
+2. **Alinhamento de Conteúdo:**
+   - Oferece controle granular sobre o alinhamento de itens em ambas as direções (horizontal e vertical).
+
+3. **Responsividade:**
+   - Suporta facilmente designs responsivos com media queries.
+   - Redimensionamento de colunas e linhas pode ser ajustado automaticamente em layouts responsivos.
+
+4. **Espaçamento e Margens:**
+   - Permite controlar espaçamento entre células e colunas com propriedades como `grid-gap` e `grid-template-columns`.
+
+### Vantagens de `display: flex`:
+
+1. **Alinhamento de Itens:**
+   - Permite fácil alinhamento de itens em uma única direção (horizontal ou vertical).
+   - Ótimo para estruturas lineares como barras de navegação ou listas.
+
+2. **Flexibilidade e Crescimento:**
+   - Itens dentro de um contêiner flexível podem crescer ou encolher para se ajustar ao espaço disponível.
+   - Ideal para layouts dinâmicos.
+
+3. **Orquestração Rápida:**
+   - É mais fácil de entender e implementar para layouts simples.
+   - Útil quando a complexidade de um sistema de grid completo não é necessária.
+
+### Desvantagens de Bibliotecas Prontas:
+
+1. **Peso Adicional:**
+   - Bibliotecas podem adicionar um peso considerável ao seu projeto, especialmente se você usar apenas uma pequena parte delas.
+
+2. **Menos Controle:**
+   - Em algumas situações, você pode ter menos controle sobre o design e comportamento dos elementos.
+
+3. **Personalização Limitada:**
+   - A personalização pode ser limitada, pois você está restrito às opções oferecidas pela biblioteca.
+
+### Considerações Gerais:
+
+- **Complexidade do Projeto:**
+  - Projetos mais complexos podem se beneficiar do poder e controle total oferecidos por `display: grid`.
+  - Projetos mais simples podem encontrar `display: flex` mais eficiente e fácil de usar.
+
+- **Compatibilidade do Navegador:**
+  - `display: flex` é amplamente suportado, mas `display: grid` pode ter alguns problemas de compatibilidade com versões mais antigas de navegadores.
+
+- **Necessidades Específicas:**
+  - A escolha entre `display: grid` e `display: flex` dependerá das necessidades específicas do seu layout e design.
+
+Em resumo, a escolha entre `display: grid`, `display: flex`, ou uma biblioteca de grids depende do contexto e requisitos específicos do projeto. Ambas as abordagens têm seu lugar e podem ser usadas de forma complementar em um mesmo projeto.
+
+### Referências adicionais
+
+[Grid para layout, flexbox para componentes](https://dev.to/codecasts/grid-para-layout-flexbox-para-componentes-gb3)\
+[A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)\
+[A Complete Guide to CSS Grid](https://css-tricks.com/snippets/css/complete-guide-grid/)
+
+### Usando um custom grid
+
+Se você quiser criar um arquivo Sass com estilos usando o display grid, inspirado no Bootstrap, pode seguir alguns passos básicos. Primeiro, certifique-se de ter o Sass instalado no seu projeto. Você pode instalar o Sass utilizando um gerenciador de pacotes, como o npm. Se ainda não o fez, você pode executar:
+
+```bash
+npm install sass
+```
+
+Aqui está um exemplo básico de como você poderia criar um arquivo Sass usando o display grid:
+
+```scss
+// _grid.scss
+
+// Container
+.container {
+  width: 100%;
+  max-width: 1140px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+// Row
+.row {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 15px;
+}
+
+// Column
+.col {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+
+  // Responsive columns
+  @for $i from 1 through 12 {
+    &.col-#{$i} {
+      grid-column: span $i;
+    }
+  }
+}
+```
+
+Depois de criar este arquivo `_grid.scss`, você pode importá-lo no seu arquivo principal Sass:
+
+```scss
+// styles.scss
+
+@import 'grid';
+
+// Seus estilos adicionais abaixo
+```
+
+Agora, você pode usar as classes `.container`, `.row`, e `.col` em seu HTML de maneira semelhante ao Bootstrap. Este é apenas um exemplo básico, e você pode ajustar e expandir conforme necessário para atender às suas necessidades específicas. Certifique-se de compilar seus arquivos Sass em um arquivo CSS usando um compilador Sass, como `sass` ou `node-sass`.

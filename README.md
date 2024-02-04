@@ -1,4 +1,4 @@
-# Guia de informações sobre padrões de arquitura que podemos usar
+# Guia de informações sobre padrões de arquitetura que podemos usar
 
 Existem vários tipos de arquiteturas de software, cada um projetado para atender a diferentes requisitos e desafios. Aqui estão alguns dos tipos mais comuns:
 

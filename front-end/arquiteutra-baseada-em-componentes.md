@@ -115,7 +115,9 @@ Para uma arquitetura baseada em componentes, você pode organizar sua estrutura 
 
 Nesta estrutura, você tem uma divisão clara entre componentes, páginas, serviços, e módulos. Isso permite uma organização fácil e escalabilidade à medida que seu projeto cresce. Note que essa é uma sugestão e você pode ajustar conforme necessário para atender aos requisitos específicos do seu projeto.
 
-Com base no artigo fornecido, aqui está uma sugestão de estrutura de pasta para o Angular:
+### Como definir uma estrutura de pastas de alto nível
+
+Aqui está uma sugestão de estrutura de pasta de alto nível para seu projeto Angular:
 
 ```plaintext 
 /src
@@ -275,6 +277,145 @@ Com base no artigo fornecido, aqui está uma sugestão de estrutura de pasta par
 
 Nessa estrutura, há uma clara separação de responsabilidades, componentes reutilizáveis no diretório "shared", uma arquitetura de pasta baseada em funcionalidades ("features"), e uma divisão entre layouts e configuração. Lembre-se de que esta é apenas uma sugestão e pode ser adaptada conforme necessário para atender aos requisitos específicos do seu projeto.
 
+### Referências adicionais
+
+[How to define a top-level folder structure for your Angular project](https://medium.com/@VenuThomas/how-to-define-a-top-level-folder-structure-for-your-angular-project-de6d151783e5)
+
+## Atomic Design
+
+O conceito de Atomic Design, popularizado por Brad Frost, é uma metodologia para criar design de interfaces de usuário de forma sistemática. Ele divide os componentes em cinco categorias principais: Átomos, Moléculas, Organismos, Templates e Páginas. Cada categoria representa um nível de complexidade crescente, e os componentes são construídos de maneira hierárquica.
+
+A integração do Atomic Design com o Angular pode ser feita de maneira eficaz, especialmente quando combinada com ferramentas como o Storybook. Aqui estão algumas considerações de como você pode usar o Atomic Design no Angular e integrar o Storybook:
+
+### Átomos, Moléculas, Organismos no Angular:
+
+1. **Átomos:**
+   - Átomos são os elementos de interface mais simples. No Angular, eles podem ser representados por componentes simples, como botões, ícones ou campos de texto.
+   - Exemplo Angular: `ButtonAtomComponent`, `IconAtomComponent`.
+
+2. **Moléculas:**
+   - Moléculas são combinações de átomos que formam componentes mais complexos. Podem ser representadas por componentes que agregam vários átomos.
+   - Exemplo Angular: `HeaderMoleculeComponent` que inclui um logo (átomo) e um botão de navegação (átomo).
+
+3. **Organismos:**
+   - Organismos são componentes ainda mais complexos que podem conter moléculas e átomos. Podem ser partes reutilizáveis e independentes do contexto do aplicativo.
+   - Exemplo Angular: `LoginFormOrganismComponent` que inclui campos de entrada (moléculas) e um botão de envio (molécula).
+
+### Templates e Páginas:
+
+1. **Templates:**
+   - Templates no Atomic Design são estruturas que aceitam organismos e moléculas. No Angular, templates podem ser representados por componentes que definem a estrutura geral de uma parte específica do aplicativo.
+   - Exemplo Angular: `DashboardTemplateComponent` que define a estrutura da página do painel.
+
+2. **Páginas:**
+   - Páginas representam layouts específicos de uma aplicação, compostos por templates, organismos, moléculas e átomos.
+   - Exemplo Angular: `HomePageComponent` que usa o `DashboardTemplateComponent` e inclui vários organismos e moléculas.
+
+### Integração com Storybook:
+
+- **Storybook para Componentes Isolados:**
+  - Crie stories para cada componente Angular, mostrando-o em diferentes estados e configurações.
+  - Isso permite que desenvolvedores e designers visualizem, interajam e testem os componentes independentemente do contexto do aplicativo.
+
+- **Organização Hierárquica no Storybook:**
+  - Mantenha a organização hierárquica dos componentes no Storybook para refletir a estrutura do Atomic Design.
+  - Use categorias e subcategorias para átomos, moléculas, organismos, etc.
+
+- **Teste Visual e Documentação:**
+  - Aproveite as capacidades de teste visual do Storybook para verificar se os componentes estão se comportando conforme o esperado.
+  - A documentação gerada automaticamente pelo Storybook pode servir como uma referência centralizada para seus componentes.
+
+Essa abordagem combinada do Atomic Design com o Angular e o Storybook pode proporcionar um desenvolvimento mais organizado, reutilizável e testável. Certifique-se de adaptar esses conceitos às necessidades específicas do seu projeto.
+
+### Referências adicionais
+
+[Atomic Design by Brad Frost](https://atomicdesign.bradfrost.com/)
+
+## Atomic Design com System Design
+
+A integração do Atomic Design com System Design pode ser poderosa para criar sistemas coesos e escaláveis. Vamos explorar como você pode combinar esses conceitos:
+
+### 1. **Atomic Design:**
+O Atomic Design concentra-se na construção de componentes de interface do usuário em diferentes níveis de abstração. Isso é especialmente útil para criar uma biblioteca de componentes reutilizáveis. Os níveis incluem Átomos, Moléculas, Organismos, Templates e Páginas.
+
+### 2. **System Design:**
+O System Design é uma abordagem para projetar e implementar sistemas complexos. Ele trata não apenas dos componentes de interface do usuário, mas também de como eles interagem com backends, serviços, dados e outros sistemas. Isso inclui a arquitetura geral do sistema.
+
+### Integração do Atomic Design com System Design:
+
+1. **Componentes Reutilizáveis:**
+   - Use o Atomic Design para criar componentes reutilizáveis, começando pelos Átomos e construindo componentes mais complexos.
+   - Esses componentes podem ser integrados diretamente em diferentes partes do seu sistema.
+
+2. **Organização em Módulos:**
+   - Organize os componentes criados pelo Atomic Design em módulos Angular. Cada módulo pode encapsular um conjunto relacionado de componentes, serviços e lógica.
+   - Módulos podem representar partes do seu sistema, como "Autenticação", "Painel de Controle", etc.
+
+3. **Comunicação entre Componentes:**
+   - Use serviços Angular para facilitar a comunicação entre componentes, especialmente quando eles estão em partes diferentes do Atomic Design.
+   - Isso pode ser útil para transmitir eventos, compartilhar estados ou coordenar ações entre diferentes partes do sistema.
+
+4. **Templates e Páginas no System Design:**
+   - Adapte os Templates do Atomic Design para representar layouts gerais de páginas no seu sistema.
+   - As Páginas do Atomic Design podem ser vistas como visões mais amplas do seu sistema, onde várias partes do Atomic Design se juntam.
+
+5. **Rotas e Navegação:**
+   - Implemente rotas no Angular para navegar entre diferentes Páginas ou visões do seu sistema.
+   - Isso pode envolver a definição de rotas para diferentes Templates, cada uma representando uma página do sistema.
+
+6. **Lógica de Negócios e Serviços:**
+   - Separe a lógica de negócios e os serviços do Angular em camadas separadas, seguindo os princípios de System Design.
+   - Isso pode envolver a criação de serviços dedicados para manipular operações de negócios específicas.
+
+7. **Testes e Manutenção:**
+   - Aproveite a modularidade e a reutilização de código facilitadas pelo Atomic Design para simplificar os testes e a manutenção.
+   - Teste cada componente individualmente e, em seguida, teste como eles interagem em conjuntos maiores (organismos, templates, etc.).
+
+8. **Adaptação Contínua:**
+   - Esteja preparado para adaptar e evoluir seus designs conforme o sistema cresce e novos requisitos surgem.
+
+A combinação do Atomic Design com System Design proporciona uma abordagem abrangente para criar sistemas front-end coesos e escaláveis. A modularidade, reutilização e organização clara são as principais vantagens dessa integração. Certifique-se de ajustar esses princípios de acordo com as necessidades específicas do seu projeto.
+
+## Storybook para criação de componentes
+
+O Storybook é uma ferramenta popular para desenvolvimento de componentes isolados, oferecendo benefícios significativos para projetos Angular e outros frameworks. Aqui estão alguns benefícios de usar o Storybook em um projeto Angular:
+
+1. **Desenvolvimento Isolado de Componentes:**
+   - O Storybook permite que você desenvolva e teste seus componentes Angular de forma isolada, sem a necessidade de integração com o restante do aplicativo.
+   - Cada componente pode ser visualizado, testado e iterado independentemente.
+
+2. **Documentação Automática:**
+   - Gera automaticamente documentação para seus componentes com base nos stories que você cria.
+   - A documentação é gerada de forma centralizada e pode incluir exemplos interativos, propriedades, eventos e outros detalhes importantes.
+
+3. **Teste Visual:**
+   - Facilita o teste visual dos componentes em diferentes estados e cenários.
+   - Permite verificar rapidamente como os componentes se comportam em diferentes tamanhos de tela, temas e estados.
+
+4. **Colaboração e Compartilhamento:**
+   - Facilita a colaboração entre equipes de design e desenvolvimento, pois todos podem acessar a biblioteca de componentes e interagir com eles.
+   - Possibilita o compartilhamento de histórias (stories) como URLs para revisão e feedback.
+
+5. **Rápido Desenvolvimento de UI:**
+   - Agiliza o desenvolvimento da interface do usuário (UI) ao permitir que os desenvolvedores visualizem rapidamente as alterações nos componentes.
+   - Reduz o tempo de compilação e recarregamento durante o desenvolvimento, pois os componentes são executados isoladamente.
+
+6. **Suporte a Múltiplos Frameworks:**
+   - O Storybook é uma ferramenta agnóstica de frameworks, o que significa que você pode usá-lo com diferentes tecnologias front-end, não se limitando ao Angular.
+   - Pode ser utilizado em projetos que envolvam vários frameworks.
+
+7. **Fácil Integração com Testes:**
+   - Pode ser facilmente integrado com testes automatizados, garantindo que os componentes estejam funcionando conforme o esperado em diferentes situações.
+
+8. **Reutilização de Componentes:**
+   - Incentiva a reutilização de componentes ao permitir que você os veja em ação e os adote em diferentes partes do seu aplicativo.
+
+Lembre-se de que, embora o Storybook seja uma ferramenta poderosa, sua adoção deve ser avaliada com base nas necessidades específicas do seu projeto e equipe. Em projetos maiores e mais complexos, o Storybook pode trazer benefícios significativos para a qualidade e eficiência do desenvolvimento.
+
+### Referências adicionais
+
+[Why Storybook?](https://storybook.js.org/docs/get-started/why-storybook)
+
 ## Configurar o Webpack no Angular
 
 Configurar o Webpack no Angular pode ser útil para personalizar a construção e adicionar funcionalidades específicas. No entanto, a maioria dos projetos Angular modernos utiliza o Angular CLI, que já inclui um sistema de construção (baseado no Webpack) e oferece uma experiência de desenvolvimento mais suave.
@@ -310,6 +451,10 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
       {
         test: /\.ts$/,
         use: 'ts-loader',
@@ -408,7 +553,7 @@ npm start
 
 Este exemplo básico configura o Webpack para transpilar TypeScript e executar uma aplicação Angular simples. Lembre-se de ajustar conforme necessário para atender às necessidades específicas do seu projeto. Se possível, considere usar o Angular CLI para uma configuração mais robusta e uma experiência de desenvolvimento mais integrada.
 
-## Usando Resolver em Angular
+## Usando Resolver em Angular para pré-carregar dados antes de ativar uma rota
 
 O arquivo `resolver.ts` em um projeto Angular é uma parte de uma estratégia chamada "resolver" que é usada para pré-carregar dados antes de ativar uma rota. Um Resolver Angular é uma classe que implementa a interface `Resolve` e é responsável por carregar dados necessários antes que uma rota seja ativada.
 
@@ -546,3 +691,4 @@ O uso de mensageria para limpeza de cache faz sentido em muitos cenários, espec
    - Em arquiteturas de microserviços, a mensageria pode ajudar a isolar serviços. Cada serviço pode se concentrar em sua funcionalidade principal, e a comunicação assíncrona permite que serviços independentes evoluam de maneira independente.
 
 No entanto, a decisão de usar mensageria para limpeza de cache dependerá das características específicas do seu sistema, dos requisitos de desempenho, escalabilidade e consistência, bem como da complexidade geral da arquitetura. É importante avaliar cuidadosamente esses fatores antes de decidir implementar essa abordagem em seu projeto.
+
