@@ -615,11 +615,11 @@ Lembre-se de que a escolha de um banco de dados depende muito dos requisitos esp
 
 ### Referências adicionais
 
-[Stop Using localStorage!](https://medium.com/@julienetienne/stop-using-localstorage-64a6d6805da8)\
-[Angular and IndexedDB: A Perfect Pair for Progressive Web Apps](https://medium.com/@zeeshankhan8838/angular-and-indexeddb-a-perfect-pair-for-progressive-web-apps-315a39f49)\
-[IndexedDB Angular Factory](https://medium.com/@sheldonled/indexeddb-angular-factory-873d2da4bfc8)\
-[Building an offline first web app with RxDB & Hasura](https://medium.com/hasura/building-an-offline-first-web-app-with-rxdb-hasura-c2c77d216c0b)\
-[RxDB Documentation](https://rxdb.info/quickstart.html)
+- [Stop Using localStorage!](https://medium.com/@julienetienne/stop-using-localstorage-64a6d6805da8)
+- [Angular and IndexedDB: A Perfect Pair for Progressive Web Apps](https://medium.com/@zeeshankhan8838/angular-and-indexeddb-a-perfect-pair-for-progressive-web-apps-315a39f49)
+- [IndexedDB Angular Factory](https://medium.com/@sheldonled/indexeddb-angular-factory-873d2da4bfc8)
+- [Building an offline first web app with RxDB & Hasura](https://medium.com/hasurabuilding-an-offline-first-web-app-with-rxdb-hasura-c2c77d216c0b)
+- [RxDB Documentation](https://rxdb.info/quickstart.html)
 
 ## Logs 
 
@@ -987,7 +987,7 @@ Ao desenvolver aplicações frontend, é crucial garantir a qualidade do código
 
 ## Outros tópicos
 
-### [Design Pattern para estilo](./arquitetura-de-estilo.md)
-### [Mensageria para limpeza de cache](./mensageria.md)
-### [Skeleton Loader](./skeleton-loader.md)
-### [Resolver em Angular](./resolver.md)
+- ### [Design Pattern para estilo](./arquitetura-de-estilo.md)
+- ### [Mensageria para limpeza de cache](./mensageria.md)
+- ### [Skeleton Loader](./skeleton-loader.md)
+- ### [Resolver em Angular](./resolver.md)
