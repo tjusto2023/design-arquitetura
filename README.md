@@ -1,6 +1,6 @@
 # Arquitetura MEAN Stack
 
-A arquitetura MEAN Stack é uma abordagem para desenvolvimento de aplicações web que utiliza um conjunto específico de tecnologias para construir o backend e o frontend de forma coesa. MEAN é um acrônimo para MongoDB, Express.js, Angular e Node.js, que são as tecnologias principais dessa arquitetura.
+A arquitetura **MEAN Stack** é uma abordagem para desenvolvimento de aplicações web que utiliza um conjunto específico de tecnologias para construir o backend e o frontend de forma coesa. **MEAN** é um acrônimo para **MongoDB, Express.js, Angular e Node.js** que são as tecnologias principais dessa arquitetura.
 
 Aqui estão as principais características e funções de cada componente na arquitetura MEAN Stack:
 
