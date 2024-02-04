@@ -52,6 +52,30 @@ A mensageria no contexto de desenvolvimento frontend geralmente refere-se à com
 
 Ao escolher uma abordagem de mensageria, é importante considerar os requisitos específicos do projeto e a complexidade da aplicação. A escolha entre soluções mais simples (como EventEmitter) e tecnologias mais avançadas (como message brokers) dependerá das necessidades específicas de comunicação da sua aplicação.
 
+## Exemplo prático de integração entre Kafka e Angular 
+
+Vamos considerar um exemplo prático de integração entre Kafka e Angular em um cenário de aplicação em tempo real. Suponha que você esteja construindo um sistema de monitoramento em tempo real para uma frota de veículos. Kafka seria utilizado para receber eventos de localização e status dos veículos, enquanto o Angular seria responsável por exibir essas informações em um dashboard interativo.
+
+1. **Kafka:**
+   - Tópico: `vehicle-status-topic`
+   - Evento: `{ vehicleId: 123, location: { lat: -23.5505, lon: -46.6333 }, status: "Active" }`
+
+2. **Angular:**
+   - Um componente de mapa exibindo a localização em tempo real dos veículos.
+   - Um painel lateral com informações detalhadas sobre o veículo selecionado.
+
+3. **Fluxo de Integração:**
+   - Um produtor Kafka envia eventos de atualização de localização e status dos veículos para o tópico `vehicle-status-topic`.
+   - Um consumidor Kafka configurado na parte do servidor processa esses eventos e envia atualizações para a aplicação Angular em tempo real.
+   - O Angular, usando técnicas de observação (por exemplo, Observables), detecta as atualizações e atualiza dinamicamente o mapa e o painel lateral com as informações mais recentes.
+
+4. **Benefícios:**
+   - **Atualizações em Tempo Real:** O Angular exibe em tempo real a localização e status atualizados dos veículos conforme os eventos do Kafka são recebidos.
+   - **Interface Interativa:** Os usuários podem interagir com o dashboard Angular para obter mais detalhes sobre veículos específicos.
+   - **Escalabilidade:** A arquitetura baseada em Kafka permite escalabilidade para lidar com grandes volumes de eventos de veículos em tempo real.
+
+Este é apenas um exemplo conceitual, e a implementação real dependeria dos detalhes específicos do seu projeto, incluindo a configuração do Kafka, a lógica de processamento de eventos, e a construção das interfaces interativas com Angular.
+
 ## Mensageria para limpeza de cache
 
 O uso de mensageria para limpeza de cache faz sentido em muitos cenários, especialmente em sistemas distribuídos ou em arquiteturas de microserviços. Aqui estão alguns motivos pelos quais pode ser uma abordagem eficaz:
