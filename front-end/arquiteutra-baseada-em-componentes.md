@@ -416,7 +416,7 @@ Lembre-se de que, embora o Storybook seja uma ferramenta poderosa, sua adoção 
 
 [Why Storybook?](https://storybook.js.org/docs/get-started/why-storybook)
 
-## Configurar o Webpack no Angular
+## Configurando o Webpack no Angular
 
 Configurar o Webpack no Angular pode ser útil para personalizar a construção e adicionar funcionalidades específicas. No entanto, a maioria dos projetos Angular modernos utiliza o Angular CLI, que já inclui um sistema de construção (baseado no Webpack) e oferece uma experiência de desenvolvimento mais suave.
 
@@ -553,142 +553,440 @@ npm start
 
 Este exemplo básico configura o Webpack para transpilar TypeScript e executar uma aplicação Angular simples. Lembre-se de ajustar conforme necessário para atender às necessidades específicas do seu projeto. Se possível, considere usar o Angular CLI para uma configuração mais robusta e uma experiência de desenvolvimento mais integrada.
 
-## Usando Resolver em Angular para pré-carregar dados antes de ativar uma rota
+## LocalStorage e IndexedDB
 
-O arquivo `resolver.ts` em um projeto Angular é uma parte de uma estratégia chamada "resolver" que é usada para pré-carregar dados antes de ativar uma rota. Um Resolver Angular é uma classe que implementa a interface `Resolve` e é responsável por carregar dados necessários antes que uma rota seja ativada.
+O **localStorage** não foi projetado para aplicativos modernos e não oferece suporte ao algoritmo de clone estruturado.
 
-Quando uma rota é acionada, o Resolver é chamado para buscar os dados necessários antes que a rota seja ativada. Isso é útil quando você precisa garantir que determinados dados estejam disponíveis antes que a visão associada à rota seja carregada.
+1. **Capacidade Limitada:**
+   - O `localStorage` possui uma capacidade de armazenamento limitada (normalmente 5 MB por domínio).
+   - Para aplicativos que exigem armazenamento significativo de dados, essa limitação pode se tornar um problema.
 
-Aqui está um exemplo básico de como um Resolver pode ser usado:
+2. **Sincronização Assíncrona:**
+   - As operações no `localStorage` são síncronas, o que pode causar bloqueios e afetar o desempenho, especialmente em aplicativos que precisam realizar muitas operações de leitura e gravação.
+
+3. **Bloqueio do Thread Principal:**
+   - As operações de leitura/gravação no `localStorage` bloqueiam o thread principal, impactando a responsividade da interface do usuário.
+
+4. **Segurança:**
+   - O `localStorage` não oferece uma camada de segurança significativa, uma vez que os dados são armazenados em texto simples.
+   - Isso pode representar um risco de segurança se informações sensíveis forem armazenadas.
+
+5. **Alternativas Sugeridas:**
+   - O artigo sugere o uso de alternativas modernas, como IndexedDB, que fornece capacidade de armazenamento mais robusta e operações assíncronas, ou Web Storage APIs, como `sessionStorage`.
+
+6. **IndexedDB:**
+   - IndexedDB é uma API de baixo nível que oferece maior controle sobre o armazenamento de dados, suporta índices, consultas e é mais adequada para grandes conjuntos de dados.
+
+### RxDB
+
+RxDB é uma biblioteca para banco de dados NoSQL reativos em JavaScript. Aqui estão algumas vantagens de usar RxDB:
+
+1. **Reatividade:**
+   - RxDB usa a programação reativa (RxJS) para permitir que os desenvolvedores observem e reajam automaticamente às mudanças nos dados. Isso é particularmente útil em ambientes onde os dados estão mudando frequentemente.
+
+2. **Multiplataforma:**
+   - RxDB é compatível com diferentes plataformas, incluindo navegadores, Node.js e React Native, o que permite o desenvolvimento de aplicativos reativos em várias plataformas.
+
+3. **Fácil Sincronização e Replicação:**
+   - RxDB facilita a sincronização de dados entre instâncias de banco de dados em diferentes dispositivos ou clientes, permitindo uma replicação eficiente dos dados.
+
+4. **Trabalha Offline:**
+   - Suporte robusto para operações offline. Os dados podem ser armazenados localmente e sincronizados posteriormente quando a conexão estiver disponível.
+
+5. **Estrutura de Dados Poderosa:**
+   - RxDB oferece uma estrutura de esquema de dados poderosa que permite aos desenvolvedores definir a estrutura dos dados de forma clara e consistente.
+
+6. **Plugins Modulares:**
+   - RxDB segue uma arquitetura de plugin, permitindo que os desenvolvedores adicionem funcionalidades personalizadas ou integrem facilmente plugins existentes para estender as capacidades do banco de dados.
+
+7. **Segurança:**
+   - RxDB suporta criptografia de dados, o que melhora a segurança, especialmente ao lidar com informações sensíveis.
+
+8. **Desenvolvimento Baseado em Observadores:**
+   - A abordagem baseada em observadores simplifica o desenvolvimento assíncrono, permitindo que os desenvolvedores respondam automaticamente a eventos de dados.
+
+9. **Facilidade de Uso:**
+   - API limpa e bem documentada, o que facilita a aprendizagem e a implementação.
+
+10. **Comunidade Ativa:**
+    - A comunidade em torno do RxDB é ativa, e há recursos, tutoriais e suporte disponíveis.
+
+Lembre-se de que a escolha de um banco de dados depende muito dos requisitos específicos do projeto, e RxDB pode ser uma escolha excelente para aplicativos que requerem reatividade e suporte offline.
+
+### Referências adicionais
+
+[Stop Using localStorage!](https://medium.com/@julienetienne/stop-using-localstorage-64a6d6805da8)\
+[Angular and IndexedDB: A Perfect Pair for Progressive Web Apps](https://medium.com/@zeeshankhan8838/angular-and-indexeddb-a-perfect-pair-for-progressive-web-apps-315a39f49)\
+[IndexedDB Angular Factory](https://medium.com/@sheldonled/indexeddb-angular-factory-873d2da4bfc8)\
+[Building an offline first web app with RxDB & Hasura](https://medium.com/hasura/building-an-offline-first-web-app-with-rxdb-hasura-c2c77d216c0b)\
+[RxDB Documentation](https://rxdb.info/quickstart.html)
+
+## Logs 
+
+A implementação de logs no frontend traz vários benefícios importantes para o desenvolvimento, depuração e manutenção de aplicações web. Aqui estão alguns benefícios específicos:
+
+1. **Debugging Eficiente:**
+   - Os logs fornecem informações detalhadas sobre o comportamento da aplicação, permitindo que os desenvolvedores identifiquem e corrijam bugs de forma mais eficiente.
+
+2. **Monitoramento em Tempo Real:**
+   - Logs ajudam a monitorar o desempenho da aplicação em tempo real. Ferramentas de log podem fornecer insights imediatos sobre erros, exceções e comportamentos inesperados.
+
+3. **Análise de Erros:**
+   - Logs detalhados facilitam a análise de erros. Quando um problema ocorre, os logs podem incluir informações sobre a pilha de chamadas, valores de variáveis e outras pistas essenciais para diagnosticar o problema.
+
+4. **Rastreamento de Usuário:**
+   - Ferramentas de logging podem rastrear sessões de usuários, permitindo que os desenvolvedores visualizem a jornada do usuário e entendam como os usuários interagem com a aplicação.
+
+5. **Otimização de Desempenho:**
+   - Logs podem ser usados para rastrear o desempenho da aplicação, identificando gargalos e áreas que precisam de otimização.
+
+6. **Melhorias Incrementais:**
+   - Registros de alterações e melhorias na aplicação podem ser documentados nos logs, proporcionando uma visão clara da evolução do código ao longo do tempo.
+
+7. **Auditoria e Segurança:**
+   - Logs podem ser utilizados para auditoria e segurança, permitindo o rastreamento de ações específicas realizadas pelos usuários e garantindo conformidade com políticas de segurança.
+
+8. **Desenvolvimento Colaborativo:**
+   - Em ambientes de desenvolvimento colaborativo, logs podem servir como uma ferramenta de comunicação, ajudando a equipe a entender as interações e decisões tomadas durante o desenvolvimento.
+
+9. **Configuração Dinâmica:**
+   - A capacidade de configurar dinamicamente a geração de logs permite ajustar os detalhes do log, como níveis e tipos, sem a necessidade de alterar o código fonte.
+
+10. **Manutenção Proativa:**
+    - Logs podem ser usados para identificar padrões que indicam possíveis problemas futuros, permitindo que a equipe de desenvolvimento tome medidas proativas antes que os problemas se tornem críticos.
+
+Ao implementar logs no frontend, é importante equilibrar a quantidade de informações registradas para evitar excesso de dados desnecessários. Ferramentas e bibliotecas, como LogRocket, Sentry, ngx-logger, entre outras, podem ser valiosas para a implementação eficaz de logs no frontend.
+
+### Usando interceptors e decorators para logs
+
+A utilização de interceptors e decorators para logs em aplicações Angular proporciona várias vantagens, incluindo uma abordagem mais modular, reutilizável e desacoplada. Aqui estão algumas vantagens específicas, juntamente com ferramentas populares de logging:
+
+### Vantagens:
+
+1. **Desacoplamento:**
+   - O uso de interceptors e decorators ajuda a manter a lógica de logging desacoplada dos componentes e serviços específicos. Isso facilita a adição ou remoção de funcionalidades de logging sem alterar diretamente a lógica de negócios.
+
+2. **Reutilização de Código:**
+   - Decorators e interceptors podem ser reutilizados em toda a aplicação, garantindo consistência nos logs e reduzindo a duplicação de código.
+
+3. **Centralização de Lógica:**
+   - Ao centralizar a lógica de logging em um interceptor ou decorator, é possível manter um controle mais efetivo sobre o formato, níveis de log e outros aspectos da geração de logs.
+
+4. **Configuração Dinâmica:**
+   - Interceptores e decorators podem ser configurados dinamicamente, permitindo ajustes na geração de logs com base em variáveis de ambiente, configurações do usuário ou outras condições.
+
+5. **Integração com Ferramentas de Logging:**
+   - Interceptores podem ser integrados facilmente a ferramentas de logging de terceiros, como o LogRocket, Sentry, entre outros, para monitorar, analisar e rastrear logs em ambientes de produção.
+
+6. **Monitoramento de Requisições HTTP:**
+   - Utilizando interceptors, é possível monitorar e logar informações sobre cada requisição HTTP, incluindo cabeçalhos, payloads e tempos de resposta.
+
+### Ferramentas de Logging:
+
+1. **LogRocket:**
+   - [LogRocket](https://logrocket.com/): Oferece registro de sessões do usuário, reprodução de bugs e análise de logs para aplicações web.
+
+2. **Sentry:**
+   - [Sentry](https://sentry.io/): Uma plataforma aberta para monitoramento de erros em tempo real que pode ser integrada com Angular para capturar e analisar erros.
+
+3. **ng-sentry-interceptor:**
+   - [ng-sentry-interceptor](https://www.npmjs.com/package/ng-sentry-interceptor): Um interceptor Angular para integrar facilmente aplicações Angular com o Sentry.
+
+4. **ngx-logger:**
+   - [ngx-logger](https://www.npmjs.com/package/ngx-logger): Uma biblioteca de logging para Angular que suporta diferentes níveis de logs e integração com serviços externos.
+
+Lembre-se de avaliar as necessidades específicas do seu projeto ao escolher ferramentas de logging e considerar requisitos como segurança, desempenho e capacidades de monitoramento.
+
+### Decorators para logs:
+
+Decorators são uma maneira eficaz de encapsular funcionalidades e podem ser úteis para implementar logs em diferentes partes do código. Aqui estão alguns exemplos de como você pode criar decorators para logs em TypeScript:
 
 ```typescript
-// user.resolver.ts
+function logMethod(target: any, key: string, descriptor: PropertyDescriptor) {
+  const originalMethod = descriptor.value;
 
-import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
-import { UserService } from './user.service';
+  descriptor.value = function (...args: any[]) {
+    console.log(`Chamando método ${key} com argumentos: ${JSON.stringify(args)}`);
+    const result = originalMethod.apply(this, args);
+    console.log(`Método ${key} retornou: ${JSON.stringify(result)}`);
+    return result;
+  };
 
+  return descriptor;
+}
+
+class Exemplo {
+  @logMethod
+  soma(a: number, b: number): number {
+    return a + b;
+  }
+}
+
+const exemplo = new Exemplo();
+exemplo.soma(2, 3); // Gera logs detalhando a chamada do método e o resultado.
+```
+
+#### Decorator para Classes:
+
+```typescript
+function logClass(constructor: Function) {
+  console.log(`Instanciando classe: ${constructor.name}`);
+}
+
+@logClass
+class Exemplo {
+  // ...
+}
+
+const exemplo = new Exemplo(); // Gera um log indicando a instância da classe.
+```
+
+#### Decorator para Propriedades:
+
+```typescript
+function logProperty(target: any, key: string) {
+  let value = target[key];
+
+  const getter = () => {
+    console.log(`Acessando propriedade ${key} com valor: ${value}`);
+    return value;
+  };
+
+  const setter = (newValue: any) => {
+    console.log(`Alterando valor da propriedade ${key} para: ${newValue}`);
+    value = newValue;
+  };
+
+  Object.defineProperty(target, key, {
+    get: getter,
+    set: setter,
+    enumerable: true,
+    configurable: true,
+  });
+}
+
+class Exemplo {
+  @logProperty
+  mensagem: string = "Olá, mundo!";
+}
+
+const exemplo = new Exemplo();
+console.log(exemplo.mensagem); // Gera logs ao acessar e alterar a propriedade.
+```
+
+Esses são apenas exemplos básicos, e você pode adaptar esses decorators para atender às suas necessidades específicas de logging. Lembre-se de que, ao implementar logs, é crucial equilibrar a quantidade de informações registradas para evitar excesso de dados desnecessários.
+
+## Conteinerização com Docker
+
+Abaixo está um exemplo de arquivo Docker Compose:
+
+#### Docker Compose para Angular:
+
+```yaml
+# docker-compose.angular.yml
+version: '3'
+services:
+  angular-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.angular
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./angular-app:/app
+    command: npm start
+```
+
+#### Dockerfile para Angular:
+
+```Dockerfile
+# Dockerfile.angular
+FROM node:14
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 4200
+
+CMD ["npm", "start"]
+```
+
+Lembre-se de ajustar os comandos e configurações conforme necessário para o seu ambiente específico. Para iniciar os serviços, você pode usar `docker-compose -f nome-do-arquivo.yml up`. Certifique-se de ter o Docker e o Docker Compose instalados em sua máquina.
+
+### Debug
+
+Debugar um aplicativo em contêiner usando o Visual Studio Code (VSCode) é uma tarefa bastante útil para identificar e corrigir problemas no código. Aqui estão os passos gerais para configurar o ambiente de debug no VSCode para um aplicativo Dockerizado:
+
+#### Pré-Requisitos:
+
+1. **Extensão Docker e Remote - Containers:**
+   - Certifique-se de ter a extensão Docker instalada no VSCode.
+   - Adicionalmente, instale a extensão Remote - Containers para facilitar o desenvolvimento dentro de contêineres.
+
+#### Passos para Configurar o Debug:
+
+1. **Adicione Configurações de Debug ao `launch.json`:**
+   - Abra o VSCode e vá para a seção "Run and Debug" (ícone de play na barra lateral).
+   - Crie um arquivo `launch.json` com configurações para o debug. Exemplo para Node.js:
+     ```json
+     {
+       "version": "0.2.0",
+       "configurations": [
+         {
+           "name": "Docker: Attach to Node",
+           "type": "node",
+           "request": "attach",
+           "port": 9229,
+           "address": "localhost",
+           "localRoot": "${workspaceFolder}",
+           "remoteRoot": "/app",
+           "protocol": "inspector",
+           "restart": true,
+           "stopOnEntry": false,
+           "smartStep": true,
+           "sourceMaps": false,
+           "outFiles": [],
+           "skipFiles": [
+             "<node_internals>/**"
+           ]
+         }
+       ]
+     }
+     ```
+
+2. **Dockerfile com Suporte para Debug:**
+   - No seu Dockerfile, adicione suporte para o debug. Exemplo para Node.js:
+     ```Dockerfile
+     FROM node:14
+
+     # Configurar a aplicação
+     WORKDIR /app
+     COPY package*.json ./
+     RUN npm install
+
+     # Adicionar suporte para debug
+     ENV NODE_OPTIONS="--inspect=0.0.0.0:9229"
+     ```
+
+3. **Configurar Docker Compose para Expor a Porta de Debug:**
+   - Se estiver usando Docker Compose, certifique-se de expor a porta de debug no serviço.
+     ```yaml
+     services:
+       meu-servico:
+         build:
+           context: .
+         ports:
+           - "3000:3000"
+           - "9229:9229"  # Porta de debug
+     ```
+
+4. **Abra o Projeto em um Contêiner:**
+   - Utilize a extensão Remote - Containers para abrir o diretório do seu projeto no contêiner.
+   - Clique com o botão direito no diretório e selecione "Reopen in Container".
+
+5. **Inicie o Aplicativo em Modo de Debug no Contêiner:**
+   - Certifique-se de que o aplicativo é iniciado com suporte a debug. Por exemplo, para Node.js:
+     ```bash
+     npm run dev
+     ```
+
+6. **Inicie a Configuração de Debug no VSCode:**
+   - Vá para a seção "Run and Debug" e selecione a configuração criada.
+   - Inicie o debug pressionando F5.
+
+Agora, o VSCode deve se conectar ao contêiner e permitir que você depure o código normalmente. Certifique-se de ajustar as configurações conforme necessário, dependendo do tipo de aplicativo e da linguagem de programação que você está usando.
+
+## Healthcheck
+
+Em aplicações Angular, a implementação de "healthchecks" (verificação de integridade) geralmente envolve a criação de serviços ou componentes que verificam a saúde de diferentes partes do aplicativo. Aqui estão algumas abordagens e exemplos para implementar healthchecks em uma aplicação Angular:
+
+### 1. **Verificação de Serviços HTTP:**
+   - Crie um serviço dedicado para cada API ou serviço externo que sua aplicação depende.
+   - Implemente métodos nesses serviços para realizar verificações de saúde, como consultar um endpoint de status.
+
+```typescript
+// Exemplo de serviço de healthcheck para uma API fictícia
 @Injectable({
   providedIn: 'root',
 })
-export class UserResolver implements Resolve<any> {
-  constructor(private userService: UserService) {}
+export class ApiServiceHealthCheckService {
+  constructor(private http: HttpClient) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
-    // Aqui, você chamaria um serviço para buscar dados antes de ativar a rota
-    return this.userService.getUser(route.params.id);
+  checkHealth(): Observable<boolean> {
+    return this.http.get<boolean>('/api/health');
   }
 }
 ```
 
-No exemplo acima, `UserResolver` é um Resolver que usa o serviço `UserService` para buscar dados do usuário antes de ativar a rota. Em seguida, você pode associar esse Resolver a uma rota específica no roteador Angular.
+### 2. **Healthcheck Component:**
+   - Crie um componente de saúde que pode ser exibido em uma rota dedicada.
+   - O componente pode usar os serviços de verificação de saúde para exibir o status geral da aplicação.
 
-Isso ajuda a garantir que os dados estejam disponíveis antes que a visão seja renderizada, evitando flashes de conteúdo vazio e melhorando a experiência do usuário.
+```typescript
+@Component({
+  selector: 'app-healthcheck',
+  template: `
+    <div *ngIf="isHealthy; else notHealthy">
+      <h2>A aplicação está saudável!</h2>
+    </div>
+    <ng-template #notHealthy>
+      <h2>A aplicação está com problemas.</h2>
+    </ng-template>
+  `,
+})
+export class HealthCheckComponent implements OnInit {
+  isHealthy: boolean = false;
 
-Aqui está um outro exemplo de como você pode usar um resolver em Angular. Vamos supor que temos uma rota que exibe detalhes de um usuário e queremos carregar os dados desse usuário antes que a rota seja ativada:
+  constructor(
+    private apiServiceHealthCheck: ApiServiceHealthCheckService,
+    // Injete outros serviços de verificação de saúde, se necessário
+  ) {}
 
-1. **Criar um Resolver:**
-   ```typescript
-   // user-resolver.service.ts
-   import { Injectable } from '@angular/core';
-   import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
-   import { UserService } from './user.service'; // Suponha que você tenha um serviço para buscar dados de usuários
+  ngOnInit(): void {
+    this.checkHealth();
+  }
 
-   @Injectable({
-     providedIn: 'root',
-   })
-   export class UserResolver implements Resolve<any> {
-     constructor(private userService: UserService) {}
+  checkHealth(): void {
+    this.apiServiceHealthCheck.checkHealth().subscribe(
+      (result) => (this.isHealthy = result),
+      () => (this.isHealthy = false)
+    );
+    // Adicione verificações de outros serviços, se necessário
+  }
+}
+```
 
-     resolve(route: ActivatedRouteSnapshot) {
-       const userId = route.params['id']; // Obtemos o ID do parâmetro da rota
+### 3. **Utilizando Guards para Roteamento:**
+   - Crie guards de rota para controlar o acesso com base no estado de saúde da aplicação.
 
-       // Usamos o serviço para buscar os dados do usuário pelo ID
-       return this.userService.getUserById(userId);
-     }
-   }
-   ```
+```typescript
+@Injectable({
+  providedIn: 'root',
+})
+export class HealthCheckGuard implements CanActivate {
+  constructor(private apiServiceHealthCheck: ApiServiceHealthCheckService) {}
 
-2. **Atualizar as Rotas:**
-   ```typescript
-   // app-routing.module.ts
-   import { NgModule } from '@angular/core';
-   import { RouterModule, Routes } from '@angular/router';
-   import { UserDetailsComponent } from './user-details/user-details.component';
-   import { UserResolver } from './user-resolver.service';
+  canActivate(): Observable<boolean | UrlTree> {
+    return this.apiServiceHealthCheck.checkHealth().pipe(
+      map((result) => result || this.router.createUrlTree(['/healthcheck']))
+    );
+  }
+}
+```
 
-   const routes: Routes = [
-     {
-       path: 'users/:id',
-       component: UserDetailsComponent,
-       resolve: {
-         userData: UserResolver,
-       },
-     },
-   ];
+Estas são apenas algumas sugestões e você pode adaptar essas abordagens conforme necessário, dependendo das necessidades específicas da sua aplicação. Certifique-se de ajustar o código conforme a arquitetura e as dependências específicas do seu projeto.
 
-   @NgModule({
-     imports: [RouterModule.forRoot(routes)],
-     exports: [RouterModule],
-   })
-   export class AppRoutingModule {}
-   ```
+## Testes
 
-3. **Usar Dados no Componente:**
-   ```typescript
-   // user-details.component.ts
-   import { Component } from '@angular/core';
-   import { ActivatedRoute } from '@angular/router';
+Ao desenvolver aplicações frontend, é crucial garantir a qualidade do código e a funcionalidade da aplicação por meio de testes. Para mais informações, clique [aqui](https://martinfowler.com/articles/practical-test-pyramid.html)
 
-   @Component({
-     selector: 'app-user-details',
-     template: `
-       <div *ngIf="user">
-         <h2>{{ user.name }}</h2>
-         <p>Email: {{ user.email }}</p>
-         <!-- Outras informações do usuário -->
-       </div>
-     `,
-   })
-   export class UserDetailsComponent {
-     user: any; // Supondo que esteja usando um objeto para representar um usuário
+## Outros tópicos
 
-     constructor(private route: ActivatedRoute) {
-       this.user = this.route.snapshot.data['userData'];
-     }
-   }
-   ```
-
-Neste exemplo, o resolver (`UserResolver`) pega o ID do usuário da rota e usa um serviço (`UserService`) para buscar os dados do usuário correspondente. Esses dados são então disponibilizados como `'userData'` no objeto de dados de rota.
-
-Ao navegar para a rota `'users/:id'`, o Angular automaticamente executa o resolver antes de ativar a rota. O componente (`UserDetailsComponent`) pode acessar os dados do usuário pré-carregados diretamente do objeto `ActivatedRoute`.
-
-
-## Mensageria para limpeza de cache
-
-O uso de mensageria para limpeza de cache faz sentido em muitos cenários, especialmente em sistemas distribuídos ou em arquiteturas de microserviços. Aqui estão alguns motivos pelos quais pode ser uma abordagem eficaz:
-
-1. **Desacoplamento:**
-   - A mensageria permite o desacoplamento entre os componentes do sistema. Isso significa que o componente que precisa realizar a limpeza de cache não precisa conhecer diretamente o componente que desencadeou a necessidade de limpeza. Isso facilita a manutenção e evolução do sistema.
-
-2. **Assincronia:**
-   - A abordagem assíncrona da mensageria permite que a limpeza de cache seja realizada de forma não bloqueante. Isso é especialmente útil em sistemas onde a operação de limpeza pode ser demorada ou onde não é crítico que seja concluída imediatamente.
-
-3. **Escala e Performance:**
-   - Em sistemas escaláveis, a mensageria pode ser uma maneira eficaz de lidar com operações de limpeza de cache em grande escala. Os serviços podem consumir as mensagens de acordo com sua capacidade, facilitando a escala horizontal.
-
-4. **Resiliência:**
-   - O uso de mensageria pode aumentar a resiliência do sistema. Se, por algum motivo, o serviço responsável pela limpeza de cache estiver temporariamente indisponível, as mensagens ainda podem ser enfileiradas para processamento posterior.
-
-5. **Consistência:**
-   - Mensageria assíncrona pode ajudar a garantir uma consistência melhor entre operações, especialmente em sistemas distribuídos. As mensagens podem ser processadas em diferentes momentos, mas a lógica subjacente pode garantir que a limpeza de cache ocorra de maneira consistente.
-
-6. **Flexibilidade:**
-   - Adotar mensageria adiciona flexibilidade ao sistema, permitindo que diferentes serviços ou componentes se integrem sem dependerem diretamente uns dos outros. Isso facilita a evolução e expansão do sistema ao longo do tempo.
-
-7. **Isolamento de Serviços:**
-   - Em arquiteturas de microserviços, a mensageria pode ajudar a isolar serviços. Cada serviço pode se concentrar em sua funcionalidade principal, e a comunicação assíncrona permite que serviços independentes evoluam de maneira independente.
-
-No entanto, a decisão de usar mensageria para limpeza de cache dependerá das características específicas do seu sistema, dos requisitos de desempenho, escalabilidade e consistência, bem como da complexidade geral da arquitetura. É importante avaliar cuidadosamente esses fatores antes de decidir implementar essa abordagem em seu projeto.
-
+### [Mensageria para limpeza de cache](./mensageria.md)
+### [Skeleton Loader](https://martinfowler.com/articles/practical-test-pyramid.html)
+### [Resolver em Angular](https://martinfowler.com/articles/practical-test-pyramid.html)
