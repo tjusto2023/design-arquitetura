@@ -1,4 +1,4 @@
-# Guia de informações sobre padrões de arquitetura que podemos usar
+## Guia de informações sobre padrões de arquitetura que podemos usar
 
 Existem vários tipos de arquiteturas de software, cada um projetado para atender a diferentes requisitos e desafios. Aqui estão alguns dos tipos mais comuns:
 
@@ -37,5 +37,5 @@ Existem vários tipos de arquiteturas de software, cada um projetado para atende
 
 A escolha da arquitetura de software depende dos requisitos específicos do projeto, das metas de desempenho, da escalabilidade, da manutenção e de outros fatores relevantes. Em muitos casos, uma combinação de abordagens pode ser usada para obter os melhores resultados.
 
-## [Arquitetura para FrontEnd](./front-end)
-## [Arquitetura para BackEnd](./back-end)
+### [Arquitetura para FrontEnd](./front-end)
+### [Arquitetura para BackEnd](./back-end)
