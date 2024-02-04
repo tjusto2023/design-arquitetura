@@ -1,6 +1,44 @@
+# Arquitetura MEAN Stack
+
+A arquitetura MEAN Stack é uma abordagem para desenvolvimento de aplicações web que utiliza um conjunto específico de tecnologias para construir o backend e o frontend de forma coesa. MEAN é um acrônimo para MongoDB, Express.js, Angular e Node.js, que são as tecnologias principais dessa arquitetura.
+
+Aqui estão as principais características e funções de cada componente na arquitetura MEAN Stack:
+
+1. **MongoDB:**
+   - **Tipo de Banco de Dados:** MongoDB é um banco de dados NoSQL orientado a documentos. Ele armazena dados em documentos JSON-like com esquemas dinâmicos.
+   - **Função:** Utilizado para armazenar dados persistentes da aplicação.
+
+2. **Express.js:**
+   - **Framework Backend:** Express.js é um framework para Node.js que simplifica o desenvolvimento de aplicativos web e APIs.
+   - **Função:** Gerencia rotas, solicitações e respostas HTTP, e interage com o banco de dados MongoDB.
+
+3. **Angular:**
+   - **Framework Frontend:** Angular é um framework de desenvolvimento front-end mantido pelo Google.
+   - **Função:** Constrói interfaces de usuário interativas e dinâmicas para os usuários interagirem com o aplicativo.
+
+4. **Node.js:**
+   - **Ambiente de Execução:** Node.js permite que o JavaScript seja executado no lado do servidor.
+   - **Função:** Utilizado como o servidor web para a aplicação, manipulando solicitações do cliente, interagindo com o banco de dados e gerenciando a lógica de negócios.
+
+**Fluxo de Dados na Arquitetura MEAN Stack:**
+1. O Angular, no lado do cliente, envia solicitações HTTP para o servidor Node.js.
+2. O Node.js, utilizando o Express.js, gerencia as rotas e lida com as solicitações.
+3. O Node.js interage com o banco de dados MongoDB para recuperar ou persistir dados.
+4. Os dados são manipulados no servidor Node.js e enviados de volta para o Angular para exibição no navegador.
+
+**Principais Vantagens:**
+- **JavaScript em Todo o Lado:** A utilização do JavaScript em todo o desenvolvimento (front-end e back-end) simplifica a sincronização de dados e lógica do aplicativo.
+- **JSON para Comunicação:** A comunicação entre o frontend e o backend é frequentemente feita usando JSON, facilitando a troca de dados.
+
+**Desafios Potenciais:**
+- **Curva de Aprendizado:** Aprender todas as tecnologias MEAN pode representar uma curva de aprendizado íngreme para desenvolvedores iniciantes.
+- **Escalabilidade:** Para aplicações muito grandes, algumas organizações optam por tecnologias diferentes para o backend.
+
+**Observação:** A arquitetura MEAN Stack evoluiu com o tempo, e algumas organizações também adotaram variações, como a utilização do Angular 2+ (ou outras bibliotecas front-end) e o uso de bancos de dados diferentes do MongoDB.
+
 ## Guia de informações sobre padrões de arquitetura que podemos usar
 
-Existem vários tipos de arquiteturas de software, cada um projetado para atender a diferentes requisitos e desafios. Aqui estão alguns dos tipos mais comuns:
+Existem vários tipos de arquiteturas de software que podemos usar em conjunto com essa abordagem, cada um projetado para atender a diferentes requisitos e desafios. Aqui estão alguns dos tipos mais comuns:
 
 1. **Arquitetura em Camadas (Layered Architecture):**
    - Organiza o sistema em camadas hierárquicas, onde cada camada oferece serviços para a camada acima dela e consome serviços da camada abaixo. Isso promove a modularidade e a manutenção do código.
