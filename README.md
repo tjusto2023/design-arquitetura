@@ -36,3 +36,6 @@ Existem vários tipos de arquiteturas de software, cada um projetado para atende
     - Foca na produção, detecção, processamento e reação a eventos. Os componentes podem se comunicar através de eventos, permitindo uma arquitetura mais flexível e responsiva.
 
 A escolha da arquitetura de software depende dos requisitos específicos do projeto, das metas de desempenho, da escalabilidade, da manutenção e de outros fatores relevantes. Em muitos casos, uma combinação de abordagens pode ser usada para obter os melhores resultados.
+
+## [Arquitetura para FrontEnd](./front-end)
+## [Arquitetura para BackEnd](./back-end)

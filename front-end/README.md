@@ -983,10 +983,11 @@ Estas são apenas algumas sugestões e você pode adaptar essas abordagens confo
 
 ## Testes
 
-Ao desenvolver aplicações frontend, é crucial garantir a qualidade do código e a funcionalidade da aplicação por meio de testes. Para mais informações, clique [aqui](https://martinfowler.com/articles/practical-test-pyramid.html)
+Ao desenvolver aplicações frontend, é crucial garantir a qualidade do código e a funcionalidade da aplicação por meio de testes. Para mais informações, clique [aqui](./test-pyramid.md)
 
 ## Outros tópicos
 
+### [Design Pattern para estilo](./arquitetura-de-estilo.md)
 ### [Mensageria para limpeza de cache](./mensageria.md)
-### [Skeleton Loader](https://martinfowler.com/articles/practical-test-pyramid.html)
-### [Resolver em Angular](https://martinfowler.com/articles/practical-test-pyramid.html)
+### [Skeleton Loader](./skeleton-loader.md)
+### [Resolver em Angular](./resolver.md)
